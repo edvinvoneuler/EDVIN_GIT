@@ -1,9 +1,9 @@
 #!/bin/bash -l
 #SBATCH -A snic2018-3-449
 #SBATCH -p core
-#SBATCH -n 4
-#SBATCH -t 2:00:00
-#SBATCH -J fastQC_Jena
+#SBATCH -n 1
+#SBATCH -t 1:00:00
+#SBATCH -J adrm_trial
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user edvinvoneuler@gmail.com
 
