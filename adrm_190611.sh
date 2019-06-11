@@ -13,8 +13,11 @@ module load AdapterRemoval
 DATDIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/RAW_FQ/ftp.shh.mpg.de/private/gorilla_calculus/
 OUTDIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P2_adrm_unmerged/
 
-AdapterRemoval --minlength 30 /home/edvo1850/DENTAL_CALC/gorilla_calculus/MTM010.A010/MTM010.A0101_S0_L006_R1_001.fastq.gz 
- 
+pair1=/home/edvo1850/DENTAL_CALC/gorilla_calculus/MTM003.A0101.170817/MTM003.A0101.170817_S0_L001_R1_001.fastq.gz
+pair2=/home/edvo1850/DENTAL_CALC/gorilla_calculus/MTM003.A0101.170817/MTM003.A0101.170817_S0_L001_R2_001.fastq.gz
 
+
+AdapterRemoval --trimns --trimqualities --minquality 30 --minlength 30 --mm 3 --collapse --mate-separator ":" --minalignmentlength 11 \
+--file1 $pair1 --file2 $pair2
 
 
