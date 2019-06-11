@@ -8,18 +8,13 @@
 #SBATCH --mail-user edvinvoneuler@gmail.com
 
 module load bioinfo-tools
-module load FastQC
+module load AdapterRemoval 
 
 DATDIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/RAW_FQ/ftp.shh.mpg.de/private/gorilla_calculus/
-OUTDIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/FASTQC
+OUTDIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P2_adrm_unmerged/
+
+AdapterRemoval --minlength 30 /home/edvo1850/DENTAL_CALC/gorilla_calculus/MTM010.A010/MTM010.A0101_S0_L006_R1_001.fastq.gz 
+ 
 
 
-for file in ${DATDIR}/*/*
-do	
-	sample=$(basename $(dirname $file))
-	read=$(basename $file)
-	read=${read%.fastq.gz}
-	mkdir -p $OUTDIR/$sample/$read
-    	fastqc $file -o $OUTDIR/$sample/$read
-	#echo $OUTDIR/$sample/$read
-done
+
