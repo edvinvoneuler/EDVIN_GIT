@@ -10,8 +10,9 @@
 module load bioinfo-tools
 module load AdapterRemoval 
 
-#OUTDIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P2_adrm_unmerged/
-
+OUTDIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P2_adrm_singleend/
+mkdir -p $OUTDIR
+cd $OUTDIR
 for file in /home/edvo1850/DENTAL_CALC/gorilla_calculus/*/*_R1_*.fastq.gz
 do
     pair1=$file
@@ -19,10 +20,12 @@ do
     basename=$(echo $file | sed 's/_R1_/_/')
     basename=${basename##*/}
     basename=${basename%.fastq.gz}
-    AdapterRemoval --trimns --trimqualities --minquality 30 --minlength 30 --mm 3 --collapse --mate-separator ":" --minalignmentlength 11 \
-    --file1 $pair1 --file2 $pair2 --basename $basename 
-    #echo $pair1
-    #echo $pair2
-    #echo $basename
+    if [ ! -f "$pair2" ]
+    then
+    	AdapterRemoval --trimns --trimqualities --minquality 30 --minlength 30 --mm 3 --minalignmentlength 11 --file1 $pair1 --basename $basename 
+    	#echo $pair1
+    	#echo $pair2
+    	#echo $basename
+    fi
 done
 

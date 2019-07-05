@@ -8,9 +8,18 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user edvinvoneuler@gmail.com
 
-for file in /home/edvo1850/DENTAL_CALC/DENTAL_CALCULUS_JENA_GORILLA_181009/P2_adrm_190612/\w{6}\.\w{5}_S\d_L\d{3}_\d{3}.collapsed$
+OUTDIR=/home/edvo1850/DENTAL_CALC/DENTAL_CALCULUS_JENA_GORILLA_181009/P2_adrm_merged_190613
+i=0
+for file in `find /home/edvo1850/DENTAL_CALC/DENTAL_CALCULUS_JENA_GORILLA_181009/P2_adrm_190612/ -regex '.+collapsed'`
 do
-    #cat $file >> ${file}_m_concat.fastq.gz
-    #cat ${file}.truncated >> ${file}_m_concat.fastq.gz
-    echo $file
+    basename=${file%_S0_L00[0-9]_00[0-9].collapsed}
+    outfile=$(basename $basename)_m_concat.fastq.gz
+    #cat $file >> $OUTDIR/$outfile
+    #cat ${file}.truncated >> $OUTDIR/$outfile
+    echo "infile0" $(basename $file) 
+    echo "infile2" $(basename $file.truncated)
+    echo "concatenated into" $outfile
+    echo $i
+    i=$((i+1))
 done
+echo "Number of concatenated files: $i"
