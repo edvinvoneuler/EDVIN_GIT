@@ -4,7 +4,7 @@ from itertools import islice
 from collections import defaultdict
 import gzip
 
-def remove_duplicates(fwd_read, rev_read, basename):
+def remove_duplicates_paired_end(fwd_read, rev_read, basename):
 
     output_fwd = open(str(basename)+"_dedup_1.fastq", "w")
     output_rev = open(str(basename)+"_dedup_2.fastq", "w")
@@ -21,10 +21,11 @@ def remove_duplicates(fwd_read, rev_read, basename):
                     forward_dict[read_F[1].strip()].append(read_R[1].strip())
                     output_fwd.write(read_F[0] + read_F[1] + read_F[2] + read_F[3])
                     output_rev.write(read_R[0] + read_R[1] + read_R[2] + read_R[3])
+                    
             output_fwd.close()
             output_rev.close()
 if __name__ == "__main__":
     fwd_read = argv[1]
     rev_read = argv[2]
     basename = argv[3]
-    remove_duplicates(fwd_read, rev_read, basename)
+    remove_duplicates_paired_end(fwd_read, rev_read, basename)
