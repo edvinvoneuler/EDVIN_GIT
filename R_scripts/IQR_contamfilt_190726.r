@@ -4,10 +4,10 @@ library(tidyverse)
 library(ggplot2)
 
 #Read files, remove subset-specific parts of samplenames
-kraken_collapsed <- read.delim(file = "kraken2_otu_table_merged_individuals_1908718.txt", skip=1)
+kraken_collapsed <- read.delim(file = "/crex/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P7_kraken2_merged-indiviuals_190717/kraken2_otu_table_merged_individuals_1908718.txt", skip=1)
 colnames(kraken_collapsed) <- gsub(pattern = "kraken2_report",replacement = "",x = colnames(kraken_collapsed))
 
-kraken_uncollapsed <- read.delim(file = "kraken2_otu_table_uncollapsed_190722.txt", skip=1)
+kraken_uncollapsed <- read.delim(file = "/crex/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P7_kraken2_uncollapsed_190722/kraken2_otu_table_uncollapsed_190722.txt", skip=1)
 colnames(kraken_uncollapsed) <- gsub(pattern = "_unmapped_uncollapsed_kraken2_report", replacement = "",x = colnames(kraken_uncollapsed))
 
 # Subset into two dataframes of shared taxas and their abundances 
@@ -76,4 +76,5 @@ kraken_collapsed_IQRfilt <- subset(kraken_collapsed, !(kraken_collapsed$X.OTU.ID
 # Sanity check to make sure a bunch of taxa didn't magically dissapear.
 dim(kraken_collapsed)[1]-dim(kraken_collapsed_IQRfilt)[1]==length(contams_unique_nozeros)
 
-
+write((paste0("#IQR-outlier filtered kraken table")), "/crex/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/SCRIPTS/EDVIN_GIT/R_scripts/Rout_filter/kraken_IQR_filtered.tsv")
+write.table(kraken_collapsed_IQRfilt, "/crex/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/SCRIPTS/EDVIN_GIT/R_scripts/Rout_filter/kraken_IQR_filtered.tsv", quote=FALSE ,row.names=FALSE, append=TRUE)
