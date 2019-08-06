@@ -8,7 +8,7 @@ library(reshape2)
 #                grey     purple    pink       blue      green    yellow    orange
 colors.st <- c("#999999","#5E4FA2","#993299","#3288BD","#ABDDA4","#FFFFBF","#FDAE61")
 
-st.all.filt <- read.delim("/home/edvo1850/DENTAL_CALC/DENTAL_CALCULUS_JENA_GORILLA_181009/SourceTracker/sink_predictions.txt")
+st.all.filt <- read.delim("/home/edvo1850/DENTAL_CALC/DENTAL_CALCULUS_JENA_GORILLA_181009/SourceTracker_merged_individuals/sink_predictions.txt")
 names(st.all.filt)
 st.all.filt <- st.all.filt[,c(1,8,7,6,3,5,4,2)]
 

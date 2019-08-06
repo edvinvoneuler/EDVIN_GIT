@@ -1,6 +1,6 @@
 # Read normalized abundance table
-otu_kraken <- read.delim(file = "kraken2_otu_table_merged_190703.txt", sep="\t", row.names = 1)
-colnames(otu_kraken) <- gsub("_kraken2_report","", colnames(otu_kraken))
+otu_kraken <- read.delim(file = "/crex/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P7_kraken2_merged-indiviuals_190717/kraken2_otu_table_merged_individuals_1908718.txt", sep="\t", skip=1, row.names=1)
+colnames(otu_kraken) <- gsub("kraken2_report","", colnames(otu_kraken))
 colnames(otu_kraken) <- gsub("X.","",colnames(otu_kraken))
 head(otu_kraken)
 
@@ -61,9 +61,9 @@ setdiff(row.names(otu_merged),row.names(otu_merged_filter)) #0
 identical(otu_merged_filter,otu_merged) # True
 # Nothing removed
 
-cat(paste0(c("# Random line that you apparantly need so SourceTracker doesn't skip the line with your samples, only took about a day to figure out \n")), file = "Rout/Jena_Calculus_SourceTracker_otu_allcontams_190708.txt")
-write.table(otu_merged, "Rout/Jena_Calculus_SourceTracker_otu_allcontams_190708.txt", sep = "\t",row.names = FALSE, quote = FALSE, append = TRUE)
-write.table(sourcetracker_merged_map, "Rout/Jena_Calculus_SourceTracker_map_allcontams_190708.txt", sep = "\t",row.names = FALSE, quote = FALSE)
+cat(paste0(c("# Kraken biom table \n")), file = "Rout_merged_individuals/Jena_Calculus_SourceTracker_otu_allcontams_190719.txt")
+write.table(otu_merged, "Rout_merged_individuals/Jena_Calculus_SourceTracker_otu_allcontams_190719.txt", sep = "\t",row.names = FALSE, quote = FALSE, append = TRUE)
+write.table(sourcetracker_merged_map, "Rout_merged_individuals/Jena_Calculus_SourceTracker_map_allcontams_190719.txt", sep = "\t",row.names = FALSE, quote = FALSE)
 
 
 
