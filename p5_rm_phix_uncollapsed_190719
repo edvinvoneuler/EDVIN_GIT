@@ -1,0 +1,28 @@
+#!/bin/bash -l
+
+#SBATCH -A snic2018-3-449 
+#SBATCH -p core
+#SBATCH -n 4
+#SBATCH -t 6:00:00
+#SBATCH -J rmphix_merged-individuals
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user edvinvoneuler@gmail.com
+
+# Preprocessing pipeline
+# Step 5: Map to PhiX, remove mapped reads (samtools view -f 4)
+
+module load bioinfo-tools samtools bwa BEDTools
+
+INDEXDIR=/proj/sllstore2017021/nobackup/HENRIQUE/phix_ref
+DATADIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P4_rmdup_uncollapsed_190718
+OUTDIR=/proj/sllstore2017021/nobackup/JAELLE/DENTAL_CALCULUS_JENA_GORILLA_181009/P5_rmphix_uncollapsed_190619
+
+mkdir -p $OUTDIR
+cd $DATADIR
+for i in *1.fastq.gz;
+do
+    reverse_read=${i/_1.fastq/_2.fastq}
+    bwa mem -t 5 $INDEXDIR/phix $i $reverse_read | samtools view -Sb -f 4 - > $OUTDIR/${i%dedup_1.fastq.gz}rmphix.bam
+    bedtools bamtofastq -i $OUTDIR/${i%dedup_1.fastq.gz}rmphix.bam -fq $OUTDIR/${i%dedup_1.fastq.gz}rmphix.fastq
+    pigz -p 5 $OUTDIR/${i%dedup_1.fastq.gz}rmphix.fastq
+done
