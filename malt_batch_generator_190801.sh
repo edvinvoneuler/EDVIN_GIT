@@ -8,7 +8,3 @@ do
 	echo -e "Input files:" $input "\n"
 	sbatch malthops_merged_individuals_190801.sh $input
 done
-
-
-
-
