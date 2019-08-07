@@ -11,8 +11,8 @@ kraken_uncollapsed <- read.delim(file = "/crex/proj/sllstore2017021/nobackup/JAE
 colnames(kraken_uncollapsed) <- gsub(pattern = "_unmapped_uncollapsed_kraken2_report", replacement = "",x = colnames(kraken_uncollapsed))
 
 # Subset into two dataframes of shared taxas and their abundances 
-shared_taxa_collapsed <- subset(kraken_uncollapsed, kraken_uncollapsed$X.OTU.ID %in% kraken_collapsed$X.OTU.ID)
-shared_taxa_uncollapsed <- subset(kraken_collapsed, kraken_collapsed$X.OTU.ID %in% kraken_uncollapsed$X.OTU.ID)
+shared_taxa_collapsed <- subset(kraken_collapsed, kraken_collapsed$X.OTU.ID %in% kraken_uncollapsed$X.OTU.ID)
+shared_taxa_uncollapsed <- subset(kraken_uncollapsed, kraken_uncollapsed$X.OTU.ID %in% kraken_collapsed$X.OTU.ID)
 
 # Sort dataframes to facilitate subtraction, add OTU ID as rownames.
 shared_taxa_collapsed <- shared_taxa_collapsed[order(shared_taxa_collapsed$X.OTU.ID),]
